@@ -1,0 +1,22 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.bar-chart {
+    background-color: pink;
+    margin-left: 10%;
+}
+
+.scales {
+    background-color: blanchedalmond;
+}
+
+h1 {
+    margin-left: 10%;
+}
+
+.bar {
+    fill: black;
+}
