@@ -1,0 +1,40 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: system-ui;
+
+
+}
+
+a {
+    color: rebeccapurple;
+    background-color: gold;
+}
+
+.disclaimer {
+    background-color: blanchedalmond;
+    color: blue;
+    letter-spacing: 1px;
+}
+
+.main {
+    margin: 30px;
+    background-color: azure;
+    color: rgb(39, 37, 37);
+}
+
+li::marker {
+    content: counter(list-item)">";
+    color: hotpink;
+}
+
+li {
+    padding-inline-start: 1ch;
+    margin-bottom: 5px;
+}
+
+ul,
+ol {
+    max-width: 50ch;
+}

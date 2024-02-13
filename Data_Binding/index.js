@@ -35,7 +35,7 @@ function parseData(data) {
 // CASE 2 -- Static data
 
 
-var dataset = [1, 2, 3, 4, 5];
+var dataset = [100, 200, 300, 400, 500];
 
 var paragraphs = d3.select('body')
     .selectAll('p')
