@@ -24,10 +24,15 @@ a {
     color: rgb(39, 37, 37);
 }
 
-li::marker {
+ol>li::marker {
     content: counter(list-item)">";
     color: hotpink;
 }
+
+ul>li::marker {
+    color: hotpink;
+}
+
 
 li {
     padding-inline-start: 1ch;
