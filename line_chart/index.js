@@ -55,6 +55,8 @@ function drawChart(data) {
     var line = d3.line()
         .x(function (d) { return x(d.date) })
         .y(function (d) { return y(d.value) })
+
+
     x.domain(d3.extent(data, function (d) { return d.date }));
     y.domain(d3.extent(data, function (d) { return d.value }));
 
