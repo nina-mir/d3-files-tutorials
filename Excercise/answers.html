@@ -5,20 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>d3.js excercise problems</title>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.min.js"
-        integrity="sha512-FHsFVKQ/T1KWJDGSbrUhTJyS1ph3eRrxI228ND0EGaEp6v4a/vGwPWd3Dtd/+9cI7ccofZvl/wulICEurHN1pg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <!-- Using the latest d3 version to use all its available functions -->
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
     <link href="style.css" rel="stylesheet">
-    <!-- If you'd like to try other versions of d3.js, please refer to its docs or
-    https://cdnjs.com/libraries/d3     -->
 </head>
 
 <body>
     <!-- Please make sure there are two seperate SVG elements
     on this HTML page. One for each problem. 
     -->
+    <p>Note: Please scroll down for Problem.2</p>
     <script>
+
         // Your answers to each problem go in here
         // Q.1 Manipulating the DOM
 
@@ -31,7 +29,7 @@
 
         const button = d3.select('body').append('button').text("add a circle").attr("class", "btn btn-add");
 
-        // Add a div element to the DOM's body using d3.js. Assign an id value of container to this <div> element
+        // Add a div element to the DOM's body using d3.js. Assign a class value of container to this <div> element
 
         d3.select('body').append('div').attr("id", "container");
 
@@ -70,6 +68,118 @@
         button.on('click', (e) => {
             add_circle();
         })
+
+        /*
+        ***
+        ***Questions.2  Create a bar chart
+        *** Solution provided here is heavily inspired by the following notebook
+        *** https://observablehq.com/@toff/bar-chart-with-negative-values
+        */
+
+        d3.select('body').append('h1').text("Problem.2").attr("class", "question")
+
+        d3.select('body').append('div').attr("id", "container-2");
+
+        /* 
+        Add a svg element as a child of container div that you created above (svgWidth, svgHeight= 600px). Assign an id value of
+        Problem-1 to this svg element.
+        */
+
+        let dataset = [30, 50, 60, -190, 400, -50];
+
+        const margin = ({ top: 30, right: 0, bottom: 30, left: 40 })
+
+        let svgWidth = 600;
+        let svgHeight = 600;
+
+        const svg_2 = d3.select("#container-2").append("svg")
+            .attr("width", 600).attr("height", 600);
+
+        // Find the largest absolute value
+        const absMax = d3.max(dataset, d => Math.abs(d));
+        console.log(absMax);
+
+        // Use that for the y scale
+        const yScale =
+            d3.scaleLinear()
+                .domain([-absMax, absMax]).nice()
+                .range([svgHeight - margin.bottom, margin.top])
+
+        xScale = d3.scaleBand()
+            .domain(d3.range(dataset.length))
+            .range([margin.left, svgWidth - margin.right])
+            .padding(0.1);
+
+        svg_2.selectAll("rect")
+            .data(dataset)
+            .enter()
+            .append("rect")
+            .attr("fill", (d) => {
+                if (d > 0) {
+                    return "steelblue";
+                } else {
+                    return 'hsl(0, 80%, 60%)';  // red, but just not too bright
+                }
+            })
+            .attr("x", (d, i) => xScale(i))
+            .attr("y", (d, i) => {
+                if (d > 0) {
+                    return yScale(d);
+                } else {
+                    return yScale(0);
+                }
+            })
+            .attr("height", (d, i) => {
+                if (d > 0) {
+                    return yScale(0) - yScale(d);
+                } else {
+                    return yScale(0) - yScale(-d);
+                }
+            })
+            .attr("width", xScale.bandwidth());
+
+
+        var text = svg_2.selectAll("text")
+            .data(dataset)
+            .enter()
+            .append("text")
+            .text(function (d) {
+                return d;
+            })
+            .attr("y", function (d, i) {
+                if (d > 0) {
+                    return yScale(d);
+                } else {
+                    return yScale(0);
+                }
+            })
+            .attr("x", (d, i) => xScale(i))
+            .attr("fill", "#A64C38");
+
+
+
+        xAxis = g => g
+            .attr("transform", `translate(0,${svgHeight / 2})`)
+            .call(d3.axisBottom(xScale).tickFormat(i => i).tickSizeOuter(0))
+            .selectAll('g.tick')
+            .attr('display', i => '');
+
+        yAxis = g => g
+            .attr("transform", `translate(${margin.left},0)`)
+            .call(d3.axisLeft(yScale).ticks(null, dataset.format))
+            .call(g => g.select(".domain").remove())
+            .call(g => g.append("text")
+                .attr("x", -margin.left)
+                .attr("y", 10)
+                .attr("fill", "currentColor")
+                .attr("text-anchor", "start")
+            )
+
+        svg_2.append("g")
+            .call(xAxis);
+
+        svg_2.append("g")
+            .call(yAxis);
     </script>
 </body>
 

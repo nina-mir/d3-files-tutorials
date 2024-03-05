@@ -3,6 +3,11 @@ body {
     background-color: rgb(239, 245, 243);
 }
 
+p {
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
 .question {
     margin-left: 20px;
     background-color: beige;
