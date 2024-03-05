@@ -24,6 +24,23 @@ var barChart = svg.selectAll("rect")
         return "translate(" + translate + ")";
     });
 
+
+var circles = svg.selectAll("circle")
+    .data(dataset)
+    .enter()
+    .append("circle")
+    .attr("cx", function (d, i) {
+        return barWidth * i + barWidth / 2;
+    })
+    .attr("cy", function (d, i) {
+        return svgHeight - d - 10;
+    })
+    .attr("r", function (d) {
+        return d / 10;
+    })
+    .attr("fill", "purple")
+
+
 var text = svg.selectAll("text")
     .data(dataset)
     .enter()
