@@ -1,4 +1,4 @@
-# This is assignment #2 regarding d3.js
+# Assignment #2 [d3.js]
 ## Intro
 - Problem.1 is ploting a bar chart of **the 2017 household median income** of the 50 US states + D.C. using a CSV dataset on [data.world](https://query.data.world/s/7hgntwsiih4wi5f7cqb5pfxxbuqgeu?dws=00000) website.
   You are asked to also plot a horizontal line depicting 2017 avg. US median income on this plot to provide a comparison of each state's value to the national average.  
@@ -7,6 +7,7 @@
 ### Problem. 1
 
 You should now be familiar with the process of creating bar charts in d3.js. The challenges in this questions are: 
+- Data manipulation using a CSV dataset
 - Creating two different plots (vertical bars for the 50 states + D.C. and a horizontal line representing the avg. US median income in 2017) on the same figure
 - Making sure that the x-axis' label representing the states names are readable as the y-axis values (hint: you would need to rotate the state's names to fit them under the x-axis)
 - Implementing a hover effect-1: Upon mouse cursor entering a bar, that bar needs to change color and the x-axis label associated with it needs to become bold font-weight.
@@ -35,4 +36,12 @@ data source: https://data.world/garyhoov/household-income-by-state
       .attr('width', 30)
       .style('fill', '#4dbeff')
 ```
-- Create a `mouseover` event that is trigerred   
+- Create a `mouseover` event that results in the affected cell's fill color to quickly (100 ms) change to `#ffffff` (white):
+```
+      d3.select(this)
+        .transition()
+        .duration(100)
+        .style('fill', 'white')
+```
+- Create a `mouseout` event that results in the affected cell's fill color to change back to its orignial color in 2000 ms.
+- 
