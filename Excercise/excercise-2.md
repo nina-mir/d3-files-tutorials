@@ -51,7 +51,7 @@ data source: https://data.world/garyhoov/household-income-by-state
   
   <img width="30%" src="https://github.com/nina-mir/d3-files-tutorials/assets/39842445/7e3d4b5d-f621-4f51-affc-732b075496e1"/>
 
--Upon clicking each cell, the fill color of the cells that share the **same row or column** as the clicked cell changes quickly to blue (`#4dbeff`), then fade slowly back to the original color. 
+- Upon clicking each cell, the fill color of the cells that share the **same row or column** as the clicked cell changes quickly to blue (`#4dbeff`), then fade slowly back to the original color. 
 hint: 
 
 ```
