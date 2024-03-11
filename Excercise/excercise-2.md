@@ -7,9 +7,9 @@
 ### Problem. 1
 
 You should now be familiar with the process of creating bar charts in d3.js. The challenges in this questions are: 
-- Data manipulation using a CSV dataset
-- Creating two different plots (vertical bars for the 50 states + D.C. and a horizontal line representing the avg. US median income in 2017) on the same figure
-- Making sure that the x-axis' label representing the states names are readable as the y-axis values (hint: you would need to rotate the state's names to fit them under the x-axis)
+- Using a CSV dataset.
+- Creating two different plots (vertical bars for the 50 states + D.C. and a horizontal line representing the avg. US median income in 2017) on the same figure.
+- Making sure that the x-axis' label representing the states names are readable as the y-axis values (hint: you would need to rotate the state's names to fit them under the x-axis).
 - Implementing a hover effect-1: Upon mouse cursor entering a bar, that bar needs to change color and the x-axis label associated with it needs to become bold font-weight.
 - Implementing a hover effect-2: Upon mouse cursor exiting a bar, that bar needs to revert its color to its original color and its assciated x-axis label's font needs to have a regular font-weight. 
 > [!Note]
@@ -36,12 +36,31 @@ data source: https://data.world/garyhoov/household-income-by-state
       .attr('width', 30)
       .style('fill', '#4dbeff')
 ```
-- Create a `mouseover` event that results in the affected cell's fill color to quickly (100 ms) change to `#ffffff` (white):
+- Create a [`mouseover`](https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseover_event) event that results in the affected cell's fill color to quickly (100 ms) change to `#ffffff` (white):
 ```
       d3.select(this)
         .transition()
         .duration(100)
         .style('fill', 'white')
 ```
-- Create a `mouseout` event that results in the affected cell's fill color to change back to its orignial color in 2000 ms.
-- 
+- Create a [`mouseout`](https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseout_event) event that results in the affected cell's fill color to change back to its orignial color in 2000 ms.
+
+### Problem. 3
+
+- Create a 10 X 10 grid of circles on a `<svg></svg>` element of 300px by 300px. Each circle has a radius of 10px and a fill color of `#ff5900`. The resulting grid should look similar to the following image:
+  
+  <img width="30%" src="https://github.com/nina-mir/d3-files-tutorials/assets/39842445/7e3d4b5d-f621-4f51-affc-732b075496e1"/>
+
+-Upon clicking each cell, the fill color of the cells that share the **same row or column** as the clicked cell changes quickly to blue (`#4dbeff`), then fade slowly back to the original color. 
+hint: 
+
+```
+       d3.select(this)
+        .transition()
+        .duration(100)
+        .style('fill', '#4dbeff')
+        .transition()
+        .duration(1000)
+        .style('fill', '#ff5900')
+```
+
